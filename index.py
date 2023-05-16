@@ -31,6 +31,10 @@ def aoai(q):
 line_bot_api = LineBotApi(os.getenv('LINE_Channel_access_token'))
 handler = WebhookHandler(os.getenv('LINE_Channel_Secret'))
 
+@app.route("/")
+def saturday():
+    return 'It\'s finally Saturday!!!'
+
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
