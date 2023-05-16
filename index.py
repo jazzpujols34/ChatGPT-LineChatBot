@@ -28,8 +28,8 @@ def aoai(q):
     msg += (response_az['choices'][0]['text'].strip())
     return msg
 
-line_bot_api = LineBotApi(os.getenv('LINE_Channel_access_token'))
-handler = WebhookHandler(os.getenv('LINE_Channel_Secret'))
+line_bot_api = LineBotApi(os.getenv('LINE_ACCESS_TOKEN'))
+handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
 
 @app.route("/")
 def saturday():
