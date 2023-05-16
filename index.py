@@ -1,24 +1,9 @@
+from flask import Flask, request, abort
 import os
 import openai
-from dotenv import load_dotenv
-from flask import Flask, request, abort
-from http.server import BaseHTTPRequestHandler
-from urllib.parse import parse_qs
-
-
-
-
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
-
-load_dotenv()
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 openai.api_type = "azure"
 openai.api_version = "2022-12-01"
@@ -26,23 +11,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = os.getenv("OPENAI_API_BASE")
 
 app = Flask(__name__)
-
-line_bot_api = LineBotApi(os.getenv('LINE_Channel_access_token'))
-handler = WebhookHandler(os.getenv('LINE_Channel_Secret'))
-
-class handler(BaseHTTPRequestHandler):
-
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type','text/plain')
-        self.end_headers()
-        message = 'Hello, this is my LINE chatbot!'
-        self.wfile.write(message.encode())
-        return
-
-@app.route("/", methods=['GET'])
-def home():
-    return 'Hello, this is my LINE chatbot!'
 
 def aoai(q):
     msg = ""
@@ -59,6 +27,9 @@ def aoai(q):
     )
     msg += (response_az['choices'][0]['text'].strip())
     return msg
+
+line_bot_api = LineBotApi(os.getenv('LINE_Channel_access_token'))
+handler = WebhookHandler(os.getenv('LINE_Channel_Secret'))
 
 @app.route("/callback", methods=['POST'])
 def callback():
