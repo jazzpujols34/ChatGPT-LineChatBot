@@ -25,6 +25,10 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv('LINE_Channel_access_token'))
 handler = WebhookHandler(os.getenv('LINE_Channel_Secret'))
 
+@app.route("/", methods=['GET'])
+def home():
+    return 'Hello, this is my LINE chatbot!'
+
 def aoai(q):
     msg = ""
     response_az = openai.Completion.create(
