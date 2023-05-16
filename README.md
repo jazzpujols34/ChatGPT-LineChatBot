@@ -14,7 +14,7 @@ To run the bot locally, you need to set up a tunneling service like ngrok to exp
 
 Copy the temporary ngrok domain and modify your LineBot Webhook URL accordingly, which should look like this: `https://xxxx.ngrok-free.app/callback`
 
-Verify the webook url, if the status returns success, you will be able to run the Line Chatbot.
+Verify the webook url, if the status returns success, you will be able to run the Line Chatbot. 
 
 ## Deploying to Vercel
 
