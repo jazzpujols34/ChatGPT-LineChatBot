@@ -35,3 +35,9 @@ You can deploy the bot to Vercel using the Vercel CLI or through GitHub:
 5. Vercel will automatically detect that you're deploying a Python project and fill in the build settings for you. If it doesn't, you can manually set the Build Command to `pip install -r requirements.txt && python Line-ChatBot.py` and the Output Directory to `.`.
 6. Click "Deploy" to deploy your project.
 7. Set your environment variables in the Vercel dashboard.
+
+## NOTE!!!
+
+I faced an issue during the deployment stage. I didn't find anything wrong with my code but when I deployed to Vercel, I got status `500 Internal Server Error` repeatedly.
+I fixed the issue by changing the variable `handler` in the code to `handler1` (there are 3 places to modify). After I did the change, the issue was fixed magically. 
+For anyone who met the same issue, I hope this helps!
