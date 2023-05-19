@@ -19,7 +19,6 @@ def aoai(transcript):
     # Append the new message to the global messages list
     messages.append({'role': 'user', 'content': transcript})
 
-    msg = ""
     response_az = openai.ChatCompletion.create(
         engine="gpt-35-turbo",
         messages=messages,  # Use the updated messages list
@@ -33,7 +32,8 @@ def aoai(transcript):
     )
 
     # msg += (response_az['choices'][0]['text'].strip())
-    bot_reply = response_az['choices'][0]['text'].strip()
+    bot_reply = [message['content'] for message in response_az['choices'][0]['message'] if message['role'] == 'assistant'][-1]
+
 
 
     # Append the bot's response to the global messages list
