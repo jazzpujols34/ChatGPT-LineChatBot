@@ -37,7 +37,7 @@ def aoai(transcript):
 
 
     # Append the bot's response to the global messages list
-    messages.append({'role': 'assistant', 'content': msg})
+    messages.append({'role': 'assistant', 'content': bot_reply})
 
     return bot_reply #msg
 
