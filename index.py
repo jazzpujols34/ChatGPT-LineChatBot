@@ -6,41 +6,27 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 openai.api_type = "azure"
-openai.api_version = "2023-03-15-preview"
+openai.api_version = "2022-12-01"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = os.getenv("OPENAI_API_BASE")
 
 app = Flask(__name__)
 
-messages = []
-
-
-def aoai(transcript):
-    # Append the new message to the global messages list
-    messages.append({'role': 'user', 'content': transcript})
-
-    response_az = openai.ChatCompletion.create(
-        engine="gpt-35-turbo",
-        messages=messages,  # Use the updated messages list
+def aoai(q):
+    msg = ""
+    response_az = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=q,
         temperature=1,
-        max_tokens=500,
+        max_tokens=300,
         top_p=0.5,
         frequency_penalty=0,
         presence_penalty=0,
         best_of=1,
         stop=None
     )
-
-    # msg += (response_az['choices'][0]['text'].strip())
-    bot_reply = [message['content'] for message in response_az['choices'][0]['message'] if message['role'] == 'assistant'][-1]
-
-
-
-    # Append the bot's response to the global messages list
-    messages.append({'role': 'assistant', 'content': bot_reply})
-
-    return bot_reply #msg
-
+    msg += (response_az['choices'][0]['text'].strip())
+    return msg
 
 line_bot_api = LineBotApi(os.getenv('LINE_ACCESS_TOKEN'))
 handler1 = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
