@@ -6,7 +6,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 openai.api_type = "azure"
-openai.api_version = "2022-12-01"
+openai.api_version = "2023-03-15-preview"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = os.getenv("OPENAI_API_BASE")
 
@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 def aoai(q):
     msg = ""
-    response_az = openai.Completion.create(
+    response_az = openai.ChatCompletion.create(
         engine="gpt-35-turbo",
         prompt=q,
         temperature=1,
