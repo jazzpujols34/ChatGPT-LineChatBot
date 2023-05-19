@@ -22,7 +22,7 @@ def aoai(transcript):
     msg = ""
     response_az = openai.ChatCompletion.create(
         engine="gpt-35-turbo",
-        prompt = "\n".join([f"{msg['role']}: {msg['content']}" for msg in messages]),
+        messages=messages,  # Use the updated messages list
         temperature=1,
         max_tokens=500,
         top_p=0.5,
@@ -32,12 +32,14 @@ def aoai(transcript):
         stop=None
     )
 
-    msg += (response_az['choices'][0]['text'].strip())
+    # msg += (response_az['choices'][0]['text'].strip())
+    bot_reply = response_az['choices'][0]['text'].strip()
+
 
     # Append the bot's response to the global messages list
     messages.append({'role': 'assistant', 'content': msg})
 
-    return msg
+    return bot_reply #msg
 
 
 line_bot_api = LineBotApi(os.getenv('LINE_ACCESS_TOKEN'))
