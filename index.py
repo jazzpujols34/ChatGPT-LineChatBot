@@ -15,7 +15,7 @@ app = Flask(__name__)
 def aoai(q):
     msg = ""
     response_az = openai.Completion.create(
-        engine="text-davinci-003",
+        engine="gpt-35-turbo",
         prompt=q,
         temperature=1,
         max_tokens=300,
