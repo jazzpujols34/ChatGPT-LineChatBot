@@ -12,21 +12,33 @@ openai.api_base = os.getenv("OPENAI_API_BASE")
 
 app = Flask(__name__)
 
+messages = []
+
+
 def aoai(q):
+    # Append the new message to the global messages list
+    messages.append({'role': 'user', 'content': transcript})
+
     msg = ""
     response_az = openai.ChatCompletion.create(
         engine="gpt-35-turbo",
-        prompt=q,
+        prompt = "\n".join([f"{msg['role']}: {msg['content']}" for msg in messages]),
         temperature=1,
-        max_tokens=300,
+        max_tokens=500,
         top_p=0.5,
         frequency_penalty=0,
         presence_penalty=0,
         best_of=1,
         stop=None
     )
+
     msg += (response_az['choices'][0]['text'].strip())
+
+    # Append the bot's response to the global messages list
+    messages.append({'role': 'assistant', 'content': msg})
+
     return msg
+
 
 line_bot_api = LineBotApi(os.getenv('LINE_ACCESS_TOKEN'))
 handler1 = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
