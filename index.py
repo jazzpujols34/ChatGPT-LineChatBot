@@ -15,7 +15,7 @@ app = Flask(__name__)
 messages = []
 
 
-def aoai(q):
+def aoai(transcript):
     # Append the new message to the global messages list
     messages.append({'role': 'user', 'content': transcript})
 
