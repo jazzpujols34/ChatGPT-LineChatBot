@@ -6,7 +6,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 openai.api_type = "azure"
-openai.api_version = "2022-12-01"
+openai.api_version = "2023-06-01-preview"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = os.getenv("OPENAI_API_BASE")
 
