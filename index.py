@@ -24,7 +24,7 @@ def aoai(q):
         engine="text-davinci-003",
         prompt=prompt_text + q,
         temperature=1,
-        max_tokens=300,
+        max_tokens=200,
         top_p=0.5,
         frequency_penalty=0,
         presence_penalty=0,
