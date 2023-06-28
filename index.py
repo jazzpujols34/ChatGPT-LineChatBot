@@ -16,7 +16,7 @@ def aoai(q):
     msg = ""
     response_az = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=q,
+        prompt="The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly." + q,
         temperature=1,
         max_tokens=300,
         top_p=0.5,
