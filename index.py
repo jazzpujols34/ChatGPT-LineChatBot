@@ -14,17 +14,11 @@ app = Flask(__name__)
 
 def aoai(q):
     msg = ""
-    prompt_text = (
-        "The following is a conversation with an AI assistant. "
-        "The assistant is helpful, creative, clever, and very friendly. \n"
-        "\nHuman: Hello, who are you? \n"
-        "AI: Hello, I am an AI assistant. I am here to help you with anything you need. "
-    )
     response_az = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=prompt_text + q,
+        prompt="The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly." + q,
         temperature=1,
-        max_tokens=200,
+        max_tokens=300,
         top_p=0.5,
         frequency_penalty=0,
         presence_penalty=0,
@@ -33,7 +27,6 @@ def aoai(q):
     )
     msg += (response_az['choices'][0]['text'].strip())
     return msg
-
 
 line_bot_api = LineBotApi(os.getenv('LINE_ACCESS_TOKEN'))
 handler1 = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
