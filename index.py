@@ -16,7 +16,7 @@ def aoai(q):
     msg = ""
     response_az = openai.Completion.create(
         engine="text-davinci-003",
-        prompt="The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly. \n \nHuman: Hello, who are you? \nAI: Hello, I am an AI assistant. I am here to help you with anything you need.\nHuman: " + q + "AI: ",
+        prompt="The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly. The assistant will not reply with simplified Chinese. \n \nHuman: Hello, who are you? \nAI: Hello, I am an AI assistant. I am here to help you with anything you need.\nHuman: " + q + "AI: ",
         temperature=0.9,
         max_tokens=256,
         top_p=1,
